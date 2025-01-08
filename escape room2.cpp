@@ -2,7 +2,7 @@
 Names: Tyler Zhang & Andrew Sinha
 Program Name: Escape the Room - Theme: Greek Mythology 
 Date: 1/3/25
-Extra: ??????????
+Extra: Use of a string array
 */
 
 #include <iostream>
@@ -139,7 +139,7 @@ void runScene1() {
 
                     if(tries == 7){
                         sleepWrite("Time is a valuable asset. One which you, it seems, have run out of. Water slowly fills the room. First to your ankles, then to your knees. Higher and higher it goes, until you're completely underwater. You run out of breath and then, nothing. ESCAPE FAILED.",25);
-                        return 0;
+                        exit(0);
                     }
                 }
                 break;   
@@ -252,7 +252,11 @@ void runScene2(){
                     }
                     else{
                         sleepWrite("That is incorrect.", 25);
-
+                        tries+=1;
+                    }
+                    if (tries == 7){
+                        sleepWrite("The gods are not to be angered. Yet you somehow accomplished that by angering Zeus of all the gods. From above a lightning bolt comes, striking you down where you stand, leaving only a pile of ashes. ESCAPE FAILED.", 25);
+                        exit(0);
                     }
                 }
                 break;  
@@ -266,5 +270,57 @@ void runScene2(){
 
 }
 void runScene3() {
-    sleepWrite("You have entered the next room. It seems to be a monument towards past greek heroes - Perseus, Odysseus, Heracles, Achilles, Jason, Daedalus, and Theseus, each with their own statue.\n These statues stand in front of you, tall and mighty. On the base of the statue, there seems to be writing in greek.\n To your right is a piece of parchment paper that may give a clue to the room.\n Behind you is an ancient sword made of bronze with a missing handle.\n Further beyond the sword are three holes at floor level that seems to be arm width.\n", 25);
+    bool d3 = false;
+    bool hasHandle = false;
+    bool hasSword = false;
+    bool hasScythe = false;
+    int hole;
+    char resp4;
+    string arr[3] = {"You search the first hole. You put your hand in it, pulling out the blade to the scythe.", "You have decided to search the second hole. You reach inside but only feel something crawl along your hand. You pull your arm out and find a spider crawling on you.", " You put your hand in the third hole and feel a round object. You pull it out to find the handle to the sword."};
+    sleepWrite("You have entered the next room. It seems to be a monument towards past greek heroes - Perseus, Odysseus, Heracles, Achilles, Jason, Daedalus, and Theseus, each with their own statue.\n These statues stand in front of you, tall and mighty. On the base of the statue, there seems to be writing in greek.\n To your right is a piece of parchment paper that may give a clue to the room.\n Behind you is an ancient sword made of bronze with a missing handle.\n Further beyond the sword are three holes at floor level that seems to be arm width.\n To your left is a strangely shaped keyhole that is not in the shape of any normal key.\n To the left of the door seems to be a scythe without the blade.\n", 25);
+    while(!d3){
+        sleepWrite("Would you like to investigate the:\n A. Statues\n B. Parchment\n C. Sword \n D. Holes \n E. Door \n F. Scythe \n G. ???", 25); 
+        cin >> resp4;
+        switch(toupper(resp4)){
+            case 'A': {
+                sleepWrite("You have decided to investigate the statues. On the base of all of them is a small date of birth and death. One stands out to you though - Perseus - who had slain Medusa with a sword, beheading her. This may be useful information for later.", 25);
+            }
+
+            case 'B': {
+                sleepWrite("You decided to investigate the piece of parchment on the table. It reads, 'Only One Shall Fit'. Ominous, yet useful. Keep this in mind - it may just get you out of this room in the end.", 25);
+            }
+
+            case 'C': {
+                sleepWrite("You decided to investigate the handle-less sword.", 25);
+                if(hasHandle){
+                    sleepWrite("However, you have found the handle for the sword. With this, you attach the handle through some work and now hold a full sword.\n This sword is not just any sword - it is the sword Perseus used to slay Medusa. It may come in handy later.", 25);
+                    hasSword = true;
+                }
+                else{
+                    sleepWrite("Unfortunately, you cannot do anything with this sword as it has no handle. But, you notice the significance of the sword -  it is the sword Perseus used to kill Medusa. It must be useful.", 25);
+                }
+            }
+            
+            case 'D': {
+                sleepWrite("You have investigated the holes. There are three of them - the one on the left, in the middle, and to the right. Would you like to search hole\n 1.\n 2.\n 3.", 25);
+                cin >> hole;
+                if(hole == 1){
+                    sleepWrite(arr[hole - 1], 25);
+                    hasScythe = true;
+                }
+                else if(hole == 2){
+                    sleepWrite(arr[hole - 1], 25);
+                }
+                else if (hole == 3) {
+                    sleepWrite(arr[hole - 1], 25);
+                    hasHandle = true;
+                }
+                else {
+                    sleepWrite("Invalid hole.", 25);
+                }
+            }
+
+
+        }
+    }
 }
