@@ -284,10 +284,12 @@ void runScene3() {
         switch(toupper(resp4)){
             case 'A': {
                 sleepWrite("You have decided to investigate the statues. On the base of all of them is a small date of birth and death. One stands out to you though - Perseus - who had slain Medusa with a sword, beheading her. This may be useful information for later.", 25);
+                break;
             }
 
             case 'B': {
                 sleepWrite("You decided to investigate the piece of parchment on the table. It reads, 'Only One Shall Fit'. Ominous, yet useful. Keep this in mind - it may just get you out of this room in the end.", 25);
+                break;
             }
 
             case 'C': {
@@ -299,6 +301,7 @@ void runScene3() {
                 else{
                     sleepWrite("Unfortunately, you cannot do anything with this sword as it has no handle. But, you notice the significance of the sword -  it is the sword Perseus used to kill Medusa. It must be useful.", 25);
                 }
+                break;
             }
             
             case 'D': {
@@ -318,6 +321,7 @@ void runScene3() {
                 else {
                     sleepWrite("Invalid hole.", 25);
                 }
+                break;
             }
 
 
