@@ -43,10 +43,12 @@ int main(){
             if (secondRoom == 2) {
                 runScene2();
                 runScene3();
+                sleepWrite("Well, you've done it. You've escaped this mysterious place. Ahead of you is a portal. Stepping through, you find yourself in a new land - filled with mythical creatures and gods. There's no going home. Enjoy your new life. ESCAPE SUCCEEDED", 25);
             }
             else {
                 runScene3();
                 runScene2();
+                sleepWrite("Well, you've done it. You've escaped this mysterious place. Ahead of you is a portal. Stepping through, you find yourself in a new land - filled with mythical creatures and gods. There's no going home. Enjoy your new life. ESCAPE SUCCEEDED", 25);
             }
             
             break;
@@ -275,6 +277,7 @@ void runScene3() {
     bool hasHandle = false;
     bool hasSword = false;
     bool hasScythe = false;
+    bool hasScytheB = false;
     int hole;
     char resp4;
     string arr[3] = {"You search the first hole. You put your hand in it, pulling out the blade to the scythe.", "You have decided to search the second hole. You reach inside but only feel something crawl along your hand. You pull your arm out and find a spider crawling on you.", " You put your hand in the third hole and feel a round object. You pull it out to find the handle to the sword."};
@@ -310,7 +313,7 @@ void runScene3() {
                 cin >> hole;
                 if(hole == 1){
                     sleepWrite(arr[hole - 1], 25);
-                    hasScythe = true;
+                    hasScytheB = true;
                 }
                 else if(hole == 2){
                     sleepWrite(arr[hole - 1], 25);
@@ -324,8 +327,64 @@ void runScene3() {
                 }
                 break;
             }
-
+            
+            case 'E': {
+                sleepWrite("You have decided to investigate the door.", 25);
+                
+                if(hasSword){
+                    sleepWrite("Would you like to use the sword?", 25);
+                    cin >> resp4;
+                    
+                    if(toupper(resp4) == 'Y'){
+                        sleepWrite("You notice that the sword handle has the same design as the lock of the door. Placing the handle in, the door unlocks, letting you exit the room. Congrats! You have escaped this room!", 25);
+                        d3 = true;
+                        break;
+                    }
+                
+                    else{
+                        sleepWrite("You decided not to. Fair enough.", 25);
+                    }
+                }
+                
+                else if(hasScythe){
+                    sleepWrite("You have the scythe. However, the blade and the handle do not fit in the door. At least you have a cool item, right?", 25);
+                }
+                
+                else{
+                    sleepWrite("You can do nothing currently.", 25);
+                }
+                break;
+            }
+            
+            case 'F': {
+                sleepWrite("You decided to investigate the scythe.", 25);
+                
+                if(hasScytheB){
+                    sleepWrite("You have the blade for the scythe. With some work, you managed to reattach it. You now have the scythe Cronus used to kill his father, Uranus, the father of the sky itself.", 25);
+                    hasScythe = true;
+                }
+                
+                else{
+                    sleepWrite("You cannot do anything with the scythe currently. It looks cool though.", 25);
+                }
+                break;
+            }
+            
+            case 'G': {
+                sleepWrite("Interesting choice, mortal. You decided to go to the door hidden in the corner of the room, opening it to see Medusa herself.", 25);
+                
+                if(hasSword){
+                    sleepWrite("Thankfully, you have the sword that killed her once. You can do it again. And so you do, preventing a silly death.", 25);
+                }
+                
+                else{
+                    sleepWrite("You cannot defend yourself, so you are turned to stone because you looked at her. Unfortunate. ESCAPE FAILED.", 25);
+                    exit(0);
+                }
+            }
 
         }
     }
 }
+
+
