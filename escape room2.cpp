@@ -33,7 +33,6 @@ int main(){
     
     // calculates a random number between 2 and 3
     int secondRoom = (rand() % 2 + 2);
-    cout << secondRoom << endl;
     char resp;
     cin >> resp;
     
@@ -386,5 +385,3 @@ void runScene3() {
         }
     }
 }
-
-
